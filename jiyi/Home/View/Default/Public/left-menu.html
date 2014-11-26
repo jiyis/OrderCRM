@@ -1,0 +1,206 @@
+
+				<div class="sidebar" id="sidebar">
+					<script type="text/javascript">
+						try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
+					</script>
+
+					<div class="sidebar-shortcuts" id="sidebar-shortcuts">
+						<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
+							<button class="btn btn-success">
+								<i class="icon-signal"></i>
+							</button>
+
+							<button class="btn btn-info">
+								<i class="icon-pencil"></i>
+							</button>
+
+							<button class="btn btn-warning">
+								<i class="icon-group"></i>
+							</button>
+
+							<button class="btn btn-danger">
+								<i class="icon-cogs"></i>
+							</button>
+						</div>
+
+						<div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
+							<span class="btn btn-success"></span>
+
+							<span class="btn btn-info"></span>
+
+							<span class="btn btn-warning"></span>
+
+							<span class="btn btn-danger"></span>
+						</div>
+					</div><!-- #sidebar-shortcuts -->
+
+					<ul class="nav nav-list" id="leftmenu">
+						<li class="active">
+							<a href="{:U('Index/index')}">
+								<i class="icon-dashboard"></i>
+								<span class="menu-text"> 控制台 </span>
+							</a>
+						</li>
+						<li style="<?php if(session('department')!='销售部') echo "display:none;";?>">
+							<a href="#" class="dropdown-toggle">
+								<i class="icon-file"></i>
+								<span class="menu-text"> 订单管理（销售部） </span>
+
+								<b class="arrow icon-angle-down"></b>
+							</a>
+
+							<ul class="submenu">
+								<li>
+									<a href="{:U('Order/index',array('num'=>1))}">
+										<i class="icon-double-angle-right"></i>
+										添加客户订单
+									</a>
+								</li>
+
+                                <!--<li>
+                                    <a href="{:U('Order/design',array('num'=>1))}">
+                                        <i class="icon-double-angle-right"></i>
+                                        添加订单要求
+                                    </a>
+                                </li>-->
+
+								<li>
+									<a href="{:U('Order/listorder',array('num'=>1))}">
+										<i class="icon-double-angle-right"></i>
+										我的客户订单
+									</a>
+								</li>
+
+							</ul>
+						</li>
+                        <li style="<?php if(session('department')!='设计部') echo "display:none;";?>">
+                            <a href="#" class="dropdown-toggle">
+                                <i class="icon-file"></i>
+                                <span class="menu-text"> 订单管理（设计部） </span>
+
+                                <b class="arrow icon-angle-down"></b>
+                            </a>
+
+                            <ul class="submenu">
+                                <li>
+                                    <a href="{:U('Art/index',array('num'=>2))}">
+                                        <i class="icon-double-angle-right"></i>
+                                        可接订单
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="{:U('Art/myorder',array('num'=>2))}">
+                                        <i class="icon-double-angle-right"></i>
+                                        正在进行的订单
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="{:U('Art/complete',array('num'=>2))}">
+                                        <i class="icon-double-angle-right"></i>
+                                        已完成的订单
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+
+                        <li style="<?php if(session('department')!='采购部') echo "display:none;";?>">
+                            <a href="#" class="dropdown-toggle">
+                                <i class="icon-desktop"></i>
+                                <span class="menu-text"> 订单审核（采购部） </span>
+
+                                <b class="arrow icon-angle-down"></b>
+                            </a>
+
+                            <ul class="submenu">
+                                <li>
+                                    <a href="{:U('Buy/index',array('num'=>3))}">
+                                        <i class="icon-double-angle-right"></i>
+                                        待审核订单
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="{:U('Buy/complete',array('num'=>3))}">
+                                        <i class="icon-double-angle-right"></i>
+                                        已审核订单
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+
+                        <li style="<?php if(session('department')!='供应商') echo "display:none;";?>">
+                            <a href="#" class="dropdown-toggle">
+                                <i class="icon-desktop"></i>
+                                <span class="menu-text"> 订单确认（供应商） </span>
+
+                                <b class="arrow icon-angle-down"></b>
+                            </a>
+
+                            <ul class="submenu">
+                                <li>
+                                    <a href="{:U('Support/index',array('num'=>4))}">
+                                        <i class="icon-double-angle-right"></i>
+                                        待确认订单
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="{:U('Support/complete',array('num'=>4))}">
+                                        <i class="icon-double-angle-right"></i>
+                                        已确认订单
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+
+						<li>
+							<a href="#" class="dropdown-toggle">
+								<i class="icon-cog"></i>
+								<span class="menu-text"> 系统设置 </span>
+
+								<b class="arrow icon-angle-down"></b>
+							</a>
+
+							<ul class="submenu">
+								<li>
+									<a href="{:U('System/edit',array('num'=>5))}">
+										<i class="icon-double-angle-right"></i>
+                                        修改密码
+									</a>
+								</li>
+
+
+							</ul>
+						</li>
+
+                        <li>
+                            <a href="{:U('Index/calendar',array('num'=>6))}">
+                                <i class="icon-calendar"></i>
+
+								<span class="menu-text">
+									日历
+									<span class="badge badge-transparent tooltip-error" title="2&nbsp;Important&nbsp;Events">
+										<i class="icon-warning-sign red bigger-130"></i>
+									</span>
+								</span>
+                            </a>
+                        </li>
+
+
+
+
+					</ul><!-- /.nav-list -->
+
+					<div class="sidebar-collapse" id="sidebar-collapse">
+						<i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
+					</div>
+
+					<script type="text/javascript">
+						try{ace.settings.check('sidebar' , 'collapsed')}catch(e){}
+					</script>
+				</div>

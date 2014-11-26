@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>下单系统</title>
+		<meta name="keywords" content="" />
+		<meta name="description" content="" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<!-- basic styles -->
+
+		<link href="__PUBLIC__css/bootstrap.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="__PUBLIC__css/font-awesome.min.css" />
+
+		<!--[if IE 7]>
+		  <link rel="stylesheet" href="__PUBLIC__css/font-awesome-ie7.min.css" />
+		<![endif]-->
+
+		<!-- page specific plugin styles -->
+
+		<link rel="stylesheet" href="__PUBLIC__css/fullcalendar.css" />
+
+		<!-- fonts -->
+
+
+
+		<!-- ace styles -->
+
+		<link rel="stylesheet" href="__PUBLIC__css/ace.min.css" />
+		<link rel="stylesheet" href="__PUBLIC__css/ace-rtl.min.css" />
+
+
+		<!--[if lte IE 8]-->
+		  <link rel="stylesheet" href="__PUBLIC__css/ace-ie.min.css" />
+		<!--[endif]-->
+
+		<!-- inline styles related to this page -->
+
+		<!-- ace settings handler -->
+
+		<script src="__PUBLIC__js/ace-extra.min.js"></script>
+
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+
+		<!--[if lt IE 9]>
+		<script src="__PUBLIC__js/html5shiv.js"></script>
+		<script src="__PUBLIC__js/respond.min.js"></script>
+		<![endif]-->
+        <style type="text/css">
+            .fc-event {
+                font-size: 14px;
+                padding: 5px;
+            }
+            .fc-today .fc-day-content div{
+                text-align: center;
+                font-size: 18px;
+                line-height: 80px;
+                color: red;
+                font-weight:900;
+                font-family: '黑体';
+            }
+        </style>
+	</head>
+
+    <body>
+    <!--############引入顶部头文件##############-->
+    <include file="Default/Public/header" />
+
+    <div class="main-container" id="main-container">
+        <script type="text/javascript">
+            try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+        </script>
+
+        <div class="main-container-inner">
+            <a class="menu-toggler" id="menu-toggler" href="#">
+                <span class="menu-text"></span>
+            </a>
+            <!--############引入左侧菜单文件##############-->
+            <include file="Default/Public/left-menu" />
+
+            <div class="main-content">
+                <div class="breadcrumbs" id="breadcrumbs">
+                    <script type="text/javascript">
+                        try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+                    </script>
+
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="icon-home home-icon"></i>
+                            <a href="#">首页</a>
+                        </li>
+                        <li class="active">控制台</li>
+                    </ul><!-- .breadcrumb -->
+
+                    <div class="nav-search" id="nav-search">
+                        <form class="form-search">
+								<span class="input-icon">
+									<input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+									<i class="icon-search nav-search-icon"></i>
+								</span>
+                        </form>
+                    </div><!-- #nav-search -->
+                </div>
+
+                <div class="page-content">
+                    <div class="page-header">
+                        <h1>
+                            控制台
+                            <small>
+                                <i class="icon-double-angle-right"></i>
+                                日历进程安排（按住鼠标左边连续选中日期，新建日程安排）
+                            </small>
+                        </h1>
+                    </div><!-- /.page-header -->
+
+						<div class="row">
+							<div class="col-xs-12">
+								<!-- PAGE CONTENT BEGINS -->
+
+								<div class="row">
+									<div class="col-sm-9">
+										<div class="space"></div>
+
+										<div id="calendar"></div>
+									</div>
+
+									<div class="col-sm-3">
+										<div class="widget-box transparent">
+											<div class="widget-header">
+												<h4>拖拽日程安排（可将日程拖拽到左侧日历里面）</h4>
+											</div>
+
+											<div class="widget-body">
+												<div class="widget-main no-padding">
+													<div id="external-events">
+														<div class="external-event label-grey" data-class="label-grey">
+															<i class="icon-move"></i>
+															日程安排1
+														</div>
+
+														<div class="external-event label-success" data-class="label-success">
+															<i class="icon-move"></i>
+															日程安排2
+														</div>
+
+														<div class="external-event label-danger" data-class="label-danger">
+															<i class="icon-move"></i>
+															日程安排3
+														</div>
+
+														<div class="external-event label-purple" data-class="label-purple">
+															<i class="icon-move"></i>
+															日程安排4
+														</div>
+
+														<div class="external-event label-yellow" data-class="label-yellow">
+															<i class="icon-move"></i>
+															日程安排5
+														</div>
+
+														<div class="external-event label-pink" data-class="label-pink">
+															<i class="icon-move"></i>
+															日程安排6
+														</div>
+
+														<div class="external-event label-info" data-class="label-info">
+															<i class="icon-move"></i>
+															日程安排7
+														</div>
+
+														<!--<label>
+															<input type="checkbox" class="ace ace-checkbox" id="drop-remove" />
+															<span class="lbl"> Remove after drop</span>
+														</label>-->
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<!-- PAGE CONTENT ENDS -->
+							</div><!-- /.col -->
+						</div><!-- /.row -->
+					</div><!-- /.page-content -->
+				</div><!-- /.main-content -->
+
+			</div><!-- /.main-container-inner -->
+
+			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+				<i class="icon-double-angle-up icon-only bigger-110"></i>
+			</a>
+		</div><!-- /.main-container -->
+
+		<!-- basic scripts -->
+
+		<!--[if !IE]> -->
+
+		<script src="http://libs.baidu.com/jquery/2.0.3/jquery.min.js"></script>
+
+        <!--[endif] -->
+
+        <!--[if IE]>-->
+        <script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script>
+        <!--[endif]-->
+
+		<!--[if !IE]> -->
+
+		<script type="text/javascript">
+			window.jQuery || document.write("<script src='__PUBLIC__js/jquery-2.0.3.min.js'>"+"<"+"/script>");
+		</script>
+
+		<!-- <![endif]-->
+
+		<!--[if IE]>
+<script type="text/javascript">
+ window.jQuery || document.write("<script src='__PUBLIC__js/jquery-1.10.2.min.js'>"+"<"+"/script>");
+</script>
+<![endif]-->
+
+		<script type="text/javascript">
+			if("ontouchend" in document) document.write("<script src='__PUBLIC__js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+		</script>
+		<script src="__PUBLIC__js/bootstrap.min.js"></script>
+		<script src="__PUBLIC__js/typeahead-bs2.min.js"></script>
+
+		<!-- page specific plugin scripts -->
+
+		<script src="__PUBLIC__js/jquery-ui-1.10.3.custom.min.js"></script>
+		<script src="__PUBLIC__js/jquery.ui.touch-punch.min.js"></script>
+		<script src="__PUBLIC__js/fullcalendar.min.js"></script>
+		<script src="__PUBLIC__js/bootbox.min.js"></script>
+
+		<!-- ace scripts -->
+
+		<script src="__PUBLIC__js/ace-elements.min.js"></script>
+		<script src="__PUBLIC__js/ace.min.js"></script>
+
+		<!-- inline scripts related to this page -->
+
+		<script type="text/javascript">
+        //请求日程安排函数，写进数据库
+        function requestDate(method,id,title,start,end,allDay){
+            var url="{:U('Index/dateHandel')}";
+            if(id=='0'){
+                data="method="+method+"&id="+id+"&title="+title+"&start="+start+"&end="+end+"&allDay="+allDay;
+                console.log(data);
+            }else{
+                data="{method:method,id:id,title:title}";
+            }
+            $.post(url,data,function(result){
+                //alert('11111');
+            })
+         }
+    jQuery(function($) {
+
+/* initialize the external events
+	-----------------------------------------------------------------*/
+
+	$('#external-events div.external-event').each(function() {
+
+		// create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
+		// it doesn't need to have a start or end
+		var eventObject = {
+			title: $.trim($(this).text()) // use the element's text as the event title
+		};
+
+		// store the Event Object in the DOM element so we can get to it later
+		$(this).data('eventObject', eventObject);
+
+		// make the event draggable using jQuery UI
+		$(this).draggable({
+			zIndex: 999,
+			revert: true,      // will cause the event to go back to its
+			revertDuration: 0  //  original position after the drag
+		});
+		
+	});
+
+
+
+
+	/* initialize the calendar
+	-----------------------------------------------------------------*/
+
+	var date = new Date();
+	var d = date.getDate();
+	var m = date.getMonth();
+	var y = date.getFullYear();
+
+	var calendar = $('#calendar').fullCalendar({
+
+		 buttonText: {
+			prev: '<i class="icon-chevron-left">昨天</i>',
+			next: '明天<i class="icon-chevron-right"></i>',
+            prevYear: '去年',
+            nextYear: '明年',
+            today:    '今天',
+            month:    '本月',
+            week:     '本周',
+            day:      '本日',
+		},
+	
+		header: {
+			left: 'prev,next today',
+			center: 'title',
+			right: 'month,basicWeek,basicDay'
+		},
+        monthNames: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+        monthNamesShort: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+        dayNames: ["周日", "周一", "周二", "周三", "周四", "周五", "周六"],
+        dayNamesShort: ["周日", "周一", "周二", "周三", "周四", "周五", "周六"],
+        today: ["今天"],
+        events:"{:U('Index/dateEvents')}",
+        /*events: [
+		{
+			title: '全天日程',
+			start: new Date(y, m, 1),
+			className: 'label-important'
+		},
+		{
+			title: 'Long Event',
+			start: new Date(y, m, d-5),
+			end: new Date(y, m, d-2),
+			className: 'label-success'
+		},
+		{
+			title: 'Some Event',
+			start: new Date(y, m, d-3, 16, 0),
+			allDay: false
+		}],*/
+		editable: true,
+		droppable: true, // this allows things to be dropped onto the calendar !!!
+		drop: function(date, allDay) { // this function is called when something is dropped
+		
+			// retrieve the dropped element's stored Event Object
+			var originalEventObject = $(this).data('eventObject');
+			var $extraEventClass = $(this).attr('data-class');
+			
+			
+			// we need to copy it, so that multiple events don't have a reference to the same object
+			var copiedEventObject = $.extend({}, originalEventObject);
+			
+			// assign it the date that was reported
+			copiedEventObject.start = date;
+			copiedEventObject.allDay = allDay;
+			if($extraEventClass) copiedEventObject['className'] = [$extraEventClass];
+			
+			// render the event on the calendar
+			// the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
+			$('#calendar').fullCalendar('renderEvent', copiedEventObject, true);
+			
+			// is the "remove after drop" checkbox checked?
+			if ($('#drop-remove').is(':checked')) {
+				// if so, remove the element from the "Draggable Events" list
+				$(this).remove();
+			}
+			
+		}
+		,
+		selectable: true,
+		selectHelper: true,
+		select: function(start, end, allDay) {
+			
+			bootbox.prompt("新的日程名称:", function(title) {
+				if (title !== null) {
+                    requestDate('create','0',title,start,end,allDay);
+					calendar.fullCalendar('renderEvent',
+						{
+							title: title,
+							start: start,
+							end: end,
+							allDay: allDay
+						},
+						true // make the event "stick"
+					);
+				}
+			});
+			
+
+			calendar.fullCalendar('unselect');
+			
+		}
+		,
+		eventClick: function(calEvent, jsEvent, view) {
+			var form = $("<form class='form-inline'><label>更改日程名称 &nbsp;</label></form>");
+			form.append("<input class='middle' autocomplete=off type=text value='" + calEvent.title + "' /> ");
+			form.append("<button type='submit' onclick=\"requestDate('change','"+calEvent._id+"','" + calEvent.title + "')\" class='btn btn-sm btn-success'><i class='icon-ok'></i> 修改</button>");
+			
+			var div = bootbox.dialog({
+				message: form,
+			
+				buttons: {
+					"delete" : {
+						"label" : "<i class='icon-trash'></i> 删除日程",
+						"className" : "btn-sm btn-danger",
+						"callback": function() {
+							calendar.fullCalendar('removeEvents' , function(ev){
+								return (ev._id == calEvent._id);
+							})
+                            requestDate('delete',calEvent._id);
+						}
+					} ,
+					"close" : {
+						"label" : "<i class='icon-remove'></i> 取消",
+						"className" : "btn-sm"
+					} 
+				}
+
+			});
+			
+			form.on('submit', function(){
+				calEvent.title = form.find("input[type=text]").val();
+				calendar.fullCalendar('updateEvent', calEvent);
+				div.modal("hide");
+				return false;
+			});
+			
+		
+			//console.log(calEvent.id);
+			//console.log(jsEvent);
+			//console.log(view);
+
+			// change the border color just for fun
+			//$(this).css('border-color', 'red');
+
+		}
+		
+	});
+    //自定义的函数a$()
+    $(function(){
+        $(".fc-today .fc-day-content div").text('今天');
+    })
+
+
+})
+		</script>
+</body>
+</html>
