@@ -1,1 +1,3 @@
-<?php print_r(get_loaded_extensions()); ?>
+<?php //print_r(get_loaded_extensions()); 
+phpinfo();
+?>
